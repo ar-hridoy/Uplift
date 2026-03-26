@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="720" prefHeight="420"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminVehicleDocsController">
+
+    <top>
+        <VBox spacing="6" style="-fx-padding: 14;">
+            <Label fx:id="lblTitle" text="Vehicle Documents" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="lblSubtitle" text="Vehicle: -" style="-fx-text-fill: #666;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <HBox spacing="14" BorderPane.alignment="CENTER">
+            <padding><Insets top="0" right="14" bottom="14" left="14"/></padding>
+
+            <!-- Left list -->
+            <VBox spacing="8" prefWidth="280">
+                <Label text="Uploaded Documents" style="-fx-font-weight: bold;"/>
+                <ListView fx:id="listDocs" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <!-- Right preview placeholder -->
+            <VBox spacing="8" HBox.hgrow="ALWAYS">
+                <Label text="Preview" style="-fx-font-weight: bold;"/>
+                <StackPane VBox.vgrow="ALWAYS"
+                           style="-fx-background-color: #F6F7F9; -fx-border-color:#DDD; -fx-border-radius:10; -fx-background-radius:10;">
+                    <Label fx:id="lblPreview" text="Select a document to preview"
+                           style="-fx-text-fill:#777;"/>
+                </StackPane>
+            </VBox>
+        </HBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 14;">
+            <Button text="Open" onAction="#handleOpen"/>
+            <Button text="Close" onAction="#handleClose"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

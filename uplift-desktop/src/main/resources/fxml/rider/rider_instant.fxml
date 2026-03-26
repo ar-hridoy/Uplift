@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.uplift.desktop.controller.rider.RiderInstantRideController">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Page title -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Instant Rides" styleClass="page-title"/>
+                <Label fx:id="lblActiveCount" text="(0 active requests)" styleClass="page-subtitle"/>
+            </HBox>
+
+            <!-- Filters -->
+            <HBox spacing="10">
+                <TextField fx:id="txtSearch" promptText="Search rides..." HBox.hgrow="ALWAYS"/>
+
+                <ComboBox fx:id="cbStatusFilter" prefWidth="150">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="All"/>
+                            <String fx:value="Pending"/>
+                            <String fx:value="Accepted"/>
+                            <String fx:value="Completed"/>
+                            <String fx:value="Cancelled"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <Button fx:id="btnRefresh"
+                        text="Refresh"
+                        onAction="#handleRefresh"
+                        styleClass="primary-button"/>
+            </HBox>
+
+            <!-- Stats cards -->
+            <HBox spacing="16">
+                <VBox styleClass="card">
+                    <Label text="Pending Requests" styleClass="card-title"/>
+                    <Label fx:id="lblPending" text="0" styleClass="card-value"/>
+                </VBox>
+
+                <VBox styleClass="card">
+                    <Label text="Accepted Today" styleClass="card-title"/>
+                    <Label fx:id="lblAcceptedToday" text="0" styleClass="card-value"/>
+                </VBox>
+
+                <VBox styleClass="card">
+                    <Label text="Avg Pickup Time" styleClass="card-title"/>
+                    <Label fx:id="lblAvgPickupTime" text="—" styleClass="card-value"/>
+                </VBox>
+            </HBox>
+
+            <!-- Table -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Live Instant Ride Requests" styleClass="section-title"/>
+
+                <TableView fx:id="tblInstantRides" VBox.vgrow="ALWAYS" styleClass="table-default">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="70"/>
+                        <TableColumn fx:id="colPassenger" text="Passenger" prefWidth="150"/>
+                        <TableColumn fx:id="colPickup" text="Pickup" prefWidth="200"/>
+                        <TableColumn fx:id="colDropoff" text="Drop-off" prefWidth="200"/>
+                        <TableColumn fx:id="colDistance" text="Distance" prefWidth="100"/>
+                        <TableColumn fx:id="colFare" text="Fare" prefWidth="120"/>
+                        <TableColumn fx:id="colRequestedAt" text="Requested At" prefWidth="180"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Ride actions -->
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="btnViewDetails"
+                        text="View Details"
+                        onAction="#handleViewDetails"
+                        styleClass="secondary-button"/>
+
+                <Button fx:id="btnAcceptRide"
+                        text="Accept Ride"
+                        onAction="#handleAcceptRide"
+                        styleClass="primary-button"/>
+            </HBox>
+
+        </VBox>
+    </children>
+</AnchorPane>

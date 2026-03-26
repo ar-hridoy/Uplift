@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminSystemController"
+            styleClass="content-root">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+            <Label text="System Settings" styleClass="page-title"/>
+
+            <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+                <!-- Pricing rules -->
+                <VBox styleClass="card" spacing="12" prefWidth="520" VBox.vgrow="ALWAYS">
+                    <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                    <Label text="Pricing Rules" styleClass="section-title"/>
+
+                    <GridPane hgap="12" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="170"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Base Fare (৳):" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtBaseFare" promptText="e.g. 50" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Per KM Rate (৳):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtPerKm" promptText="e.g. 15" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Service Fee (%):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtServiceFee" promptText="e.g. 10" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Scheduled Seat Price (৳):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtSeatPrice" promptText="e.g. 80" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Reset" onAction="#handleResetPricing"/>
+                        <Button text="Save Pricing" onAction="#handleSavePricing" styleClass="primary-button"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Notifications / backups -->
+                <VBox styleClass="card" spacing="12" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+                    <Label text="System Controls" styleClass="section-title"/>
+
+                    <CheckBox fx:id="chkEmailOtp" text="Enable Email OTP"/>
+                    <CheckBox fx:id="chkRideNotifications" text="Enable Ride Notifications"/>
+                    <CheckBox fx:id="chkMaintenanceMode" text="Maintenance Mode (block logins)"/>
+
+                    <Separator/>
+
+                    <Label text="Database" styleClass="section-title"/>
+                    <HBox spacing="10">
+                        <Button text="Backup Now" onAction="#handleBackup"/>
+                        <Button text="Restore..." onAction="#handleRestore"/>
+                    </HBox>
+
+                    <Separator/>
+
+                    <Label text="System Logs" styleClass="section-title"/>
+                    <TextArea fx:id="txtLogs" prefRowCount="8" promptText="System logs preview..." />
+
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Refresh Logs" onAction="#handleRefreshLogs"/>
+                    </HBox>
+                </VBox>
+
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

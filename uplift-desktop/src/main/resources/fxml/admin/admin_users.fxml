@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminUsersController">
+
+    <children>
+        <VBox spacing="14" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Title -->
+            <Label text="User Management" styleClass="page-title"/>
+
+            <!-- Filters / toolbar card -->
+            <VBox spacing="10" styleClass="card">
+                <children>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Search:" styleClass="field-label"/>
+                        <TextField fx:id="txtSearch" promptText="Search by name / email / username"
+                                   styleClass="text-input-field" HBox.hgrow="ALWAYS"/>
+
+                        <Label text="Role:" styleClass="field-label"/>
+                        <ChoiceBox fx:id="cbRole" prefWidth="150"/>
+
+                        <Label text="Status:" styleClass="field-label"/>
+                        <ChoiceBox fx:id="cbStatus" prefWidth="150"/>
+
+                        <Button text="Apply" onAction="#handleApplyFilters" styleClass="primary-button"/>
+                        <Button text="Clear" onAction="#handleClearFilters"/>
+                    </HBox>
+
+                    <Separator/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Create Rider" onAction="#handleCreateRider" styleClass="primary-button"/>
+                        <Button text="Approve Rider" onAction="#handleApproveRider"/>
+                        <Button text="Reject Rider" onAction="#handleRejectRider"/>
+                        <Button text="Activate" onAction="#handleActivateUser"/>
+                        <Button text="Deactivate" onAction="#handleDeactivateUser"/>
+                        <Button text="Reset Password" onAction="#handleResetPassword"/>
+                        <Button text="Edit User" onAction="#handleEditUser"/>
+                        <Pane HBox.hgrow="ALWAYS"/>
+                        <Button text="Refresh" onAction="#handleRefresh"/>
+                    </HBox>
+                </children>
+            </VBox>
+
+            <!-- Tabs -->
+            <TabPane VBox.vgrow="ALWAYS">
+
+                <!-- All Users -->
+                <Tab text="All Users" closable="false">
+                    <content>
+                        <VBox spacing="10">
+                            <TableView fx:id="tblAllUsers" styleClass="table-default" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colId" text="ID" prefWidth="70"/>
+                                    <TableColumn fx:id="colName" text="Name" prefWidth="200"/>
+                                    <TableColumn fx:id="colUsername" text="Username" prefWidth="160"/>
+                                    <TableColumn fx:id="colEmail" text="Email" prefWidth="240"/>
+                                    <TableColumn fx:id="colRole" text="Role" prefWidth="120"/>
+                                    <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                                    <TableColumn fx:id="colCreated" text="Created" prefWidth="160"/>
+                                </columns>
+                            </TableView>
+
+                            <Label fx:id="lblHint"
+                                   text="Tip: Select a row then use action buttons (Approve/Deactivate/Reset Password etc.)"
+                                   style="-fx-text-fill: #666666;"/>
+                        </VBox>
+                    </content>
+                </Tab>
+
+                <!-- Pending Rider Approvals -->
+                <Tab text="Pending Rider Approvals" closable="false">
+                    <content>
+                        <VBox spacing="10">
+                            <TableView fx:id="tblPendingRiders" styleClass="table-default" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colPId" text="ID" prefWidth="70"/>
+                                    <TableColumn fx:id="colPName" text="Name" prefWidth="220"/>
+                                    <TableColumn fx:id="colPEmail" text="Email" prefWidth="260"/>
+                                    <TableColumn fx:id="colPPhone" text="Phone" prefWidth="150"/>
+                                    <TableColumn fx:id="colPStatus" text="Status" prefWidth="140"/>
+                                    <TableColumn fx:id="colPRequested" text="Requested At" prefWidth="180"/>
+                                </columns>
+                            </TableView>
+
+                            <HBox spacing="10">
+                                <Button text="Approve Selected" onAction="#handleApproveRider" styleClass="primary-button"/>
+                                <Button text="Reject Selected" onAction="#handleRejectRider"/>
+                            </HBox>
+                        </VBox>
+                    </content>
+                </Tab>
+
+                <!-- Activity Logs -->
+                <Tab text="Activity Logs" closable="false">
+                    <content>
+                        <VBox spacing="10">
+                            <TableView fx:id="tblLogs" styleClass="table-default" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colLTime" text="Time" prefWidth="200"/>
+                                    <TableColumn fx:id="colLActor" text="Actor" prefWidth="160"/>
+                                    <TableColumn fx:id="colLAction" text="Action" prefWidth="220"/>
+                                    <TableColumn fx:id="colLDetails" text="Details" prefWidth="420"/>
+                                </columns>
+                            </TableView>
+
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <Button text="Reload Logs" onAction="#handleReloadLogs"/>
+                                <Label text="(Backend integration later)" style="-fx-text-fill:#777777;"/>
+                            </HBox>
+                        </VBox>
+                    </content>
+                </Tab>
+
+            </TabPane>
+
+        </VBox>
+    </children>
+</AnchorPane>

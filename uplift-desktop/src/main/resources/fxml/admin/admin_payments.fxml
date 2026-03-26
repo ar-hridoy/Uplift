@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminPaymentsController"
+            styleClass="content-root">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+            <Label text="Payments &amp; Finance" styleClass="page-title"/>
+
+            <!-- Summary cards -->
+            <HBox spacing="16">
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="Today Revenue" styleClass="card-title"/>
+                    <Label fx:id="lblTodayRevenue" text="/$0.00" styleClass="card-value"/>
+                </VBox>
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="This Week" styleClass="card-title"/>
+                    <Label fx:id="lblWeekRevenue" text="/$0.00" styleClass="card-value"/>
+                </VBox>
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="This Month" styleClass="card-title"/>
+                    <Label fx:id="lblMonthRevenue" text="/$0.00" styleClass="card-value"/>
+                </VBox>
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="Disputes" styleClass="card-title"/>
+                    <Label fx:id="lblDisputes" text="0" styleClass="card-value"/>
+                </VBox>
+            </HBox>
+
+            <!-- Filters -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearch" promptText="Search by email, ride id, trx id..." prefWidth="320"
+                           styleClass="text-input-field"/>
+                <ComboBox fx:id="cmbStatus" promptText="Status" prefWidth="160"/>
+                <ComboBox fx:id="cmbRange" promptText="Range" prefWidth="160"/>
+                <Button text="Apply" onAction="#handleApplyFilters" styleClass="primary-button"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Export CSV" onAction="#handleExportCsv"/>
+            </HBox>
+
+            <!-- Transactions table -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Transactions" styleClass="section-title"/>
+                <TableView fx:id="tblTransactions" styleClass="table-default" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colTrxId" text="Trx ID" prefWidth="160"/>
+                        <TableColumn fx:id="colRideId" text="Ride ID" prefWidth="120"/>
+                        <TableColumn fx:id="colPayer" text="Payer" prefWidth="220"/>
+                        <TableColumn fx:id="colAmount" text="Amount" prefWidth="120"/>
+                        <TableColumn fx:id="colMethod" text="Method" prefWidth="120"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="140"/>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="180"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Actions -->
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Refund Selected" onAction="#handleRefund"/>
+                <Button text="Mark Dispute Resolved" onAction="#handleResolveDispute"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

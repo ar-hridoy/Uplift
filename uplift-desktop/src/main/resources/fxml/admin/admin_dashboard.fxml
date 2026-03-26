@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="700" prefWidth="1200"
+            stylesheets="@/css/theme.css"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminDashboardController">
+
+    <!-- SIDEBAR -->
+    <left>
+        <VBox prefWidth="260" styleClass="sidebar">
+
+            <!-- Header card -->
+            <VBox styleClass="sidebar-header-card">
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <StackPane styleClass="sidebar-logo-circle">
+                        <ImageView fitHeight="30" fitWidth="30" preserveRatio="true">
+                            <image><Image url="@/img/uplift_logo_c.png"/></image>
+                        </ImageView>
+                    </StackPane>
+
+                    <VBox spacing="4">
+                        <Label styleClass="sidebar-title" text="UpLift">
+                            <font><Font size="30.0"/></font>
+                        </Label>
+                        <Label styleClass="sidebar-subtitle" text="Admin Panel"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <Separator/>
+            <Label styleClass="sidebar-menu-title" text="Menu"/>
+
+            <VBox spacing="4" styleClass="sidebar-menu">
+                <ToggleButton fx:id="btnMenuDashboard" onAction="#showDashboard" styleClass="sidebar-button" text="Dashboard"/>
+                <ToggleButton fx:id="btnMenuUsers"     onAction="#showUsers"     styleClass="sidebar-button" text="User Management"/>
+                <ToggleButton fx:id="btnMenuRides"     onAction="#showRides"     styleClass="sidebar-button" text="Ride Management"/>
+                <ToggleButton fx:id="btnMenuVehicles"  onAction="#showVehicles"  styleClass="sidebar-button" text="Vehicle Management"/>
+                <ToggleButton fx:id="btnMenuPayments"  onAction="#showPayments"  styleClass="sidebar-button" text="Payments &amp; Finance"/>
+                <ToggleButton fx:id="btnMenuSystem"    onAction="#showSystem"    styleClass="sidebar-button" text="System Settings"/>
+                <ToggleButton fx:id="btnMenuComplaints" onAction="#showComplaints" styleClass="sidebar-button" text="Complaints &amp; Support"/>
+            </VBox>
+
+            <Pane VBox.vgrow="ALWAYS"/>
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="btnLogout"
+                        text="LOG OUT"
+                        onAction="#handleLogout"
+                        styleClass="logout-pill-small"/>
+            </HBox>
+            <Label alignment="CENTER" maxWidth="Infinity" styleClass="sidebar-footer"
+                   text="UpLift • Admin Control Center" wrapText="true"/>
+        </VBox>
+    </left>
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox spacing="20" styleClass="topbar">
+
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label fx:id="lblAdminName" styleClass="topbar-username" text="Welcome, Admin"/>
+                    <Label fx:id="lblAdminEmail" styleClass="topbar-role" text="admin@uplift.com"/>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER" spacing="10" styleClass="topbar-clock">
+                    <Label styleClass="topbar-clock-icon" text="🕒"/>
+                    <VBox spacing="2">
+                        <Label fx:id="lblCurrentDateTime" styleClass="topbar-clock-main" text="yyyy-MM-dd hh:mm:ss a"/>
+                        <Label fx:id="lblCurrentDateDetail" styleClass="topbar-clock-sub" text="EEEE, MMMM d, yyyy"/>
+                    </VBox>
+                </HBox>
+            </HBox>
+
+            <Button onAction="#openProfile" prefWidth="130" styleClass="topbar-profile-btn">
+                <graphic>
+                    <HBox alignment="CENTER" spacing="8">
+                        <ImageView fitHeight="18" fitWidth="18" preserveRatio="true">
+                            <image><Image url="@/img/profile.png"/></image>
+                        </ImageView>
+                        <Label text="Profile">
+                            <font><Font name="System Bold" size="16"/></font>
+                        </Label>
+                    </HBox>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <StackPane fx:id="contentRoot" styleClass="content-root">
+            <!-- Default view -->
+            <AnchorPane fx:id="dashboardContainer">
+                <children>
+                    <VBox spacing="16">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                        <Label styleClass="page-title" text="Admin Dashboard"/>
+
+                        <HBox spacing="16">
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Total Riders"/>
+                                <Label fx:id="lblTotalRiders" styleClass="card-value" text="0"/>
+                            </VBox>
+
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Total Passengers"/>
+                                <Label fx:id="lblTotalPassengers" styleClass="card-value" text="0"/>
+                            </VBox>
+
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Rides Today"/>
+                                <Label fx:id="lblRidesToday" styleClass="card-value" text="0"/>
+                            </VBox>
+
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Pending Approvals"/>
+                                <Label fx:id="lblPendingApprovals" styleClass="card-value" text="0"/>
+                            </VBox>
+                        </HBox>
+
+                        <VBox spacing="10">
+                            <Label styleClass="section-title" text="Recent Activity"/>
+                            <TableView fx:id="tblActivity" styleClass="table-default">
+                                <columns>
+                                    <TableColumn text="Time" prefWidth="180"/>
+                                    <TableColumn text="Actor" prefWidth="160"/>
+                                    <TableColumn text="Action" prefWidth="240"/>
+                                    <TableColumn text="Details" prefWidth="380"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </VBox>
+                </children>
+            </AnchorPane>
+        </StackPane>
+    </center>
+</BorderPane>

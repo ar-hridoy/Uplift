@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.rider.RiderEarningsController"
+            styleClass="content-root">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+            <Label text="Earnings &amp; Payouts" styleClass="page-title"/>
+
+            <!-- summary cards -->
+            <HBox spacing="16">
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="Today" styleClass="card-title"/>
+                    <Label fx:id="lblToday" text="/$0.00" styleClass="card-value"/>
+                </VBox>
+
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="This Week" styleClass="card-title"/>
+                    <Label fx:id="lblWeek" text="/$0.00" styleClass="card-value"/>
+                </VBox>
+
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="This Month" styleClass="card-title"/>
+                    <Label fx:id="lblMonth" text="/$0.00" styleClass="card-value"/>
+                </VBox>
+
+                <VBox styleClass="card" prefWidth="240">
+                    <Label text="Pending Payout" styleClass="card-title"/>
+                    <Label fx:id="lblPending" text="/$0.00" styleClass="card-value"/>
+                </VBox>
+            </HBox>
+
+            <!-- filters -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <ComboBox fx:id="cmbRange" prefWidth="180" promptText="Range"/>
+                <ComboBox fx:id="cmbStatus" prefWidth="180" promptText="Status"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Request Payout" onAction="#handleRequestPayout" styleClass="primary-button"/>
+            </HBox>
+
+            <!-- table -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Payout History" styleClass="section-title"/>
+                <TableView fx:id="tblPayouts" styleClass="table-default" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" text="Payout ID" prefWidth="140"/>
+                        <TableColumn fx:id="colAmount" text="Amount" prefWidth="120"/>
+                        <TableColumn fx:id="colMethod" text="Method" prefWidth="140"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="140"/>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="180"/>
+                        <TableColumn fx:id="colNote" text="Note" prefWidth="260"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminRidesController">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Ride Management" styleClass="page-title"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Refresh" onAction="#handleRefresh"/>
+            </HBox>
+
+            <!-- Filters -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearch" promptText="Search by ride ID / passenger / rider / location" prefWidth="360"/>
+                <ComboBox fx:id="cmbStatus" promptText="Status" prefWidth="160"/>
+                <Button text="Search" onAction="#handleSearch"/>
+                <Button text="Reset" onAction="#handleReset"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblStatus" text="" style="-fx-text-fill:#666;"/>
+            </HBox>
+
+            <!-- Tabs -->
+            <TabPane VBox.vgrow="ALWAYS">
+                <tabs>
+
+                    <!-- Instant rides -->
+                    <Tab text="Instant Rides" closable="false">
+                        <content>
+                            <VBox spacing="12" style="-fx-padding: 10;">
+                                <TableView fx:id="tblInstant" VBox.vgrow="ALWAYS" styleClass="table-default">
+                                    <columns>
+                                        <TableColumn fx:id="colIId" text="ID" prefWidth="90"/>
+                                        <TableColumn fx:id="colIPassenger" text="Passenger" prefWidth="180"/>
+                                        <TableColumn fx:id="colIRider" text="Rider" prefWidth="180"/>
+                                        <TableColumn fx:id="colIFrom" text="From" prefWidth="200"/>
+                                        <TableColumn fx:id="colITo" text="To" prefWidth="200"/>
+                                        <TableColumn fx:id="colIFare" text="Fare" prefWidth="110"/>
+                                        <TableColumn fx:id="colIStatus" text="Status" prefWidth="130"/>
+                                        <TableColumn fx:id="colIDate" text="Date" prefWidth="180"/>
+                                    </columns>
+                                </TableView>
+
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <Button text="View Details" onAction="#viewInstantDetails"/>
+                                    <Button text="Assign Driver" onAction="#assignDriverInstant"/>
+                                    <Button text="Cancel Ride" onAction="#cancelInstant" style="-fx-background-color:#E53935; -fx-text-fill:white;"/>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </Tab>
+
+                    <!-- Scheduled rides -->
+                    <Tab text="Scheduled Rides" closable="false">
+                        <content>
+                            <VBox spacing="12" style="-fx-padding: 10;">
+                                <TableView fx:id="tblScheduled" VBox.vgrow="ALWAYS" styleClass="table-default">
+                                    <columns>
+                                        <TableColumn fx:id="colSId" text="ID" prefWidth="90"/>
+                                        <TableColumn fx:id="colSPassenger" text="Passenger" prefWidth="180"/>
+                                        <TableColumn fx:id="colSRider" text="Rider" prefWidth="180"/>
+                                        <TableColumn fx:id="colSFrom" text="From" prefWidth="200"/>
+                                        <TableColumn fx:id="colSTo" text="To" prefWidth="200"/>
+                                        <TableColumn fx:id="colSSeats" text="Seats" prefWidth="90"/>
+                                        <TableColumn fx:id="colSFare" text="Fare" prefWidth="110"/>
+                                        <TableColumn fx:id="colSStatus" text="Status" prefWidth="130"/>
+                                        <TableColumn fx:id="colSWhen" text="Scheduled Time" prefWidth="190"/>
+                                    </columns>
+                                </TableView>
+
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <Button text="View Details" onAction="#viewScheduledDetails"/>
+                                    <Button text="Assign Driver" onAction="#assignDriverScheduled"/>
+                                    <Button text="Modify" onAction="#modifyScheduled"/>
+                                    <Button text="Cancel" onAction="#cancelScheduled" style="-fx-background-color:#E53935; -fx-text-fill:white;"/>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </Tab>
+
+                </tabs>
+            </TabPane>
+
+        </VBox>
+    </children>
+</AnchorPane>

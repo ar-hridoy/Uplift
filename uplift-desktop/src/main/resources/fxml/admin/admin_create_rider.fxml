@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminCreateRiderController"
+            stylesheets="@/css/theme.css"
+            styleClass="root-background">
+
+    <center>
+        <HBox spacing="16" prefWidth="920" prefHeight="520">
+            <padding>
+                <Insets top="18" right="18" bottom="18" left="18"/>
+            </padding>
+
+            <!-- LEFT: Profile-like preview card -->
+            <VBox spacing="12" prefWidth="280" styleClass="card profile-left-card">
+                <padding>
+                    <Insets top="18" right="16" bottom="18" left="16"/>
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <StackPane styleClass="avatar-circle">
+                        <ImageView fitWidth="34" fitHeight="34" preserveRatio="true">
+                            <image>
+                                <Image url="@/img/profile.png"/>
+                            </image>
+                        </ImageView>
+                    </StackPane>
+
+                    <VBox spacing="2">
+                        <Label fx:id="lblPreviewName" text="New Rider" styleClass="profile-name"/>
+                        <Label text="RIDER" styleClass="profile-role"/>
+                    </VBox>
+                </HBox>
+
+                <Separator/>
+
+                <VBox spacing="10">
+                    <VBox spacing="4">
+                        <Label text="Email" styleClass="muted-label"/>
+                        <Label fx:id="lblPreviewEmail" text="-" styleClass="profile-value"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Username" styleClass="muted-label"/>
+                        <Label fx:id="lblPreviewUsername" text="-" styleClass="profile-value"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Phone" styleClass="muted-label"/>
+                        <Label fx:id="lblPreviewPhone" text="-" styleClass="profile-value"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Account Status" styleClass="muted-label"/>
+                        <Label fx:id="lblPreviewStatus" text="INACTIVE" styleClass="status-badge-inactive"/>
+                    </VBox>
+                </VBox>
+
+                <Pane VBox.vgrow="ALWAYS"/>
+
+                <Label text="Tip: Create as ACTIVE to allow login immediately."
+                       wrapText="true"
+                       style="-fx-text-fill:#6b7280; -fx-font-size:12;"/>
+            </VBox>
+
+            <!-- RIGHT: Main form card (like profile form) -->
+            <VBox spacing="14" styleClass="card profile-right-card" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets top="18" right="18" bottom="18" left="18"/>
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Create Rider Account" styleClass="page-title"/>
+                </HBox>
+
+                <Label fx:id="lblStatus" text="" styleClass="muted-label"/>
+
+                <Separator/>
+
+                <GridPane hgap="12" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="130"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Full Name:" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtFullName" promptText="Rider full name"
+                               styleClass="text-input-field" prefHeight="38"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Username:" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtUsername" promptText="Unique username"
+                               styleClass="text-input-field" prefHeight="38"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Email:" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtEmail" promptText="rider@email.com"
+                               styleClass="text-input-field" prefHeight="38"
+                               GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Phone:" styleClass="form-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtPhone" promptText="01XXXXXXXXX"
+                               styleClass="text-input-field" prefHeight="38"
+                               GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Address:" styleClass="form-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtAddress" promptText="Street, City, Country"
+                               styleClass="text-input-field" prefHeight="38"
+                               GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                    <Label text="Temp Pass:" styleClass="form-label" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="txtPassword" promptText="Temporary password"
+                                   styleClass="text-input-field" prefHeight="38"
+                                   GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                </GridPane>
+
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <CheckBox fx:id="chkActive" text="Create as ACTIVE (can login immediately)"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <Label text="Role: RIDER" style="-fx-text-fill:#6b7280; -fx-font-size:12;"/>
+                </HBox>
+
+                <Separator/>
+
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Cancel" onAction="#handleCancel" styleClass="secondary-button"/>
+                    <Button text="Create Rider" onAction="#handleCreate" styleClass="primary-button" prefHeight="40"/>
+                </HBox>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

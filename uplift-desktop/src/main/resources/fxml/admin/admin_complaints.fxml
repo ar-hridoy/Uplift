@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminComplaintsController"
+            styleClass="content-root">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+            <Label text="Complaints &amp; Support" styleClass="page-title"/>
+
+            <!-- Top tools -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearch" promptText="Search by user, ride id, complaint id..."
+                           prefWidth="360" styleClass="text-input-field"/>
+                <ComboBox fx:id="cmbStatus" promptText="Status" prefWidth="160"/>
+                <Button text="Apply" onAction="#handleApply" styleClass="primary-button"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Block User" onAction="#handleBlockUser"/>
+            </HBox>
+
+            <SplitPane dividerPositions="0.62" VBox.vgrow="ALWAYS">
+
+                <!-- Left: table -->
+                <VBox spacing="10">
+                    <Label text="Complaint List" styleClass="section-title"/>
+                    <TableView fx:id="tblComplaints" styleClass="table-default" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colId" text="ID" prefWidth="90"/>
+                            <TableColumn fx:id="colUser" text="User" prefWidth="220"/>
+                            <TableColumn fx:id="colRide" text="Ride" prefWidth="120"/>
+                            <TableColumn fx:id="colType" text="Type" prefWidth="140"/>
+                            <TableColumn fx:id="colStatus" text="Status" prefWidth="140"/>
+                            <TableColumn fx:id="colDate" text="Date" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <!-- Right: details -->
+                <VBox spacing="12" styleClass="card">
+                    <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+                    <Label text="Details" styleClass="section-title"/>
+
+                    <Label fx:id="lblMeta" text="Select a complaint to view details."
+                           style="-fx-text-fill:#666;"/>
+
+                    <TextArea fx:id="txtMessage" editable="false" wrapText="true" prefRowCount="8"
+                              promptText="Complaint message..."/>
+
+                    <Label text="Admin Response" styleClass="section-title"/>
+                    <TextArea fx:id="txtResponse" wrapText="true" prefRowCount="5"
+                              promptText="Write your response..."/>
+
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Mark In Progress" onAction="#handleInProgress"/>
+                        <Button text="Resolve" onAction="#handleResolve" styleClass="primary-button"/>
+                    </HBox>
+                </VBox>
+
+            </SplitPane>
+        </VBox>
+    </children>
+</AnchorPane>

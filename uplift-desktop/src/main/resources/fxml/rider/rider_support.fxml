@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.rider.RiderSupportController"
+            styleClass="content-root">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+            <Label text="Support &amp; Complaints" styleClass="page-title"/>
+
+            <SplitPane dividerPositions="0.55" VBox.vgrow="ALWAYS">
+
+                <!-- LEFT: list of tickets -->
+                <VBox spacing="10">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="txtSearch" promptText="Search tickets..." prefWidth="320"
+                                   styleClass="text-input-field"/>
+                        <ComboBox fx:id="cmbStatus" promptText="Status" prefWidth="160"/>
+                        <Button text="Apply" onAction="#handleApply" styleClass="primary-button"/>
+                    </HBox>
+
+                    <Label text="My Tickets" styleClass="section-title"/>
+
+                    <TableView fx:id="tblTickets" styleClass="table-default" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colId" text="Ticket" prefWidth="120"/>
+                            <TableColumn fx:id="colType" text="Type" prefWidth="160"/>
+                            <TableColumn fx:id="colStatus" text="Status" prefWidth="140"/>
+                            <TableColumn fx:id="colDate" text="Date" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <!-- RIGHT: create / details -->
+                <VBox spacing="12" styleClass="card">
+                    <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+                    <Label text="Create New Ticket" styleClass="section-title"/>
+
+                    <GridPane hgap="12" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="120"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Type:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="cmbType" promptText="Select type" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Ride ID:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtRideId" promptText="Optional" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Message:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextArea fx:id="txtMessage" promptText="Write your issue..." prefRowCount="6"
+                                  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button text="Reset" onAction="#handleReset"/>
+                        <Button text="Submit Ticket" onAction="#handleSubmit" styleClass="primary-button"/>
+                    </HBox>
+
+                    <Separator/>
+
+                    <Label text="Selected Ticket Details" styleClass="section-title"/>
+                    <Label fx:id="lblSelectedMeta" text="Select a ticket from the table."
+                           style="-fx-text-fill:#666;"/>
+                    <TextArea fx:id="txtSelectedDetails" editable="false" wrapText="true" prefRowCount="6"/>
+                </VBox>
+
+            </SplitPane>
+        </VBox>
+    </children>
+</AnchorPane>

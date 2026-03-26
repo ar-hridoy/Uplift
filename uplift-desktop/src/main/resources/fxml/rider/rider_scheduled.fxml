@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.uplift.desktop.controller.rider.RiderScheduledRideController"
+            stylesheets="@/css/theme.css">
+
+    <children>
+        <VBox spacing="16"
+              AnchorPane.topAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0">
+            <VBox spacing="10">
+                <!-- Post new scheduled ride -->
+                <TitledPane text="Post New Scheduled Ride" expanded="false">
+                    <content>
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="30"/>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="30"/>
+                            </columnConstraints>
+
+                            <Label text="From:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                            <TextField fx:id="txtFrom" promptText="Pickup location"
+                                       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                            <Label text="To:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                            <TextField fx:id="txtTo" promptText="Dropoff location"
+                                       GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                            <Label text="Date:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                            <DatePicker fx:id="dpRideDate"
+                                        GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                            <Label text="Time (HH:mm):" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                            <TextField fx:id="txtRideTime" promptText="e.g. 14:30"
+                                       GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                            <Label text="Total Seats:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                            <TextField fx:id="txtTotalSeats" promptText="e.g. 4"
+                                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                            <Label text="Price / Seat:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                            <TextField fx:id="txtPricePerSeat" promptText="e.g. 150.00"
+                                       GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                            <Button text="Post Ride"
+                                    onAction="#handleCreateScheduledRide"
+                                    GridPane.rowIndex="3" GridPane.columnIndex="3"
+                                    GridPane.halignment="RIGHT"/>
+                        </GridPane>
+                    </content>
+                </TitledPane>
+
+                <!-- your existing filters + table go under here -->
+            </VBox>
+
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- HEADER -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Scheduled Rides" styleClass="page-title"/>
+                <Label text="Manage your upcoming shared trips"
+                       styleClass="page-subtitle"/>
+            </HBox>
+
+            <!-- FILTER BAR -->
+            <HBox spacing="10" styleClass="card">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+
+                <Label text="Filter:" styleClass="section-title"/>
+
+                <Label text="From" styleClass="filter-label"/>
+                <DatePicker fx:id="dpFrom"/>
+
+                <Label text="To" styleClass="filter-label"/>
+                <DatePicker fx:id="dpTo"/>
+
+                <Label text="Status" styleClass="filter-label"/>
+                <ComboBox fx:id="cbStatus" prefWidth="150">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="All"/>
+                            <String fx:value="OPEN"/>
+                            <String fx:value="BOOKED"/>
+                            <String fx:value="COMPLETED"/>
+                            <String fx:value="CANCELLED"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Button text="Reset"
+                        onAction="#handleResetFilters"
+                        styleClass="secondary-btn"/>
+
+                <Button text="Refresh"
+                        onAction="#handleRefresh"
+                        styleClass="primary-btn"/>
+            </HBox>
+
+            <!-- SUMMARY CARDS -->
+            <HBox spacing="16">
+                <VBox styleClass="card" prefWidth="220">
+                    <Label text="Upcoming rides" styleClass="card-title"/>
+                    <Label fx:id="lblUpcomingCount" text="0" styleClass="card-value"/>
+                </VBox>
+
+                <VBox styleClass="card" prefWidth="220">
+                    <Label text="Seats booked" styleClass="card-title"/>
+                    <Label fx:id="lblSeatsBooked" text="0" styleClass="card-value"/>
+                </VBox>
+
+                <VBox styleClass="card" prefWidth="220">
+                    <Label text="Today's rides" styleClass="card-title"/>
+                    <Label fx:id="lblTodayScheduled" text="0" styleClass="card-value"/>
+                </VBox>
+            </HBox>
+
+            <!-- TABLE -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Scheduled rides list" styleClass="section-title"/>
+
+                <TableView fx:id="tblScheduledRides"
+                           styleClass="table-default"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                        <TableColumn fx:id="colRoute" text="Route" prefWidth="220"/>
+                        <TableColumn fx:id="colDateTime" text="Date &amp; Time" prefWidth="180"/>
+                        <TableColumn fx:id="colSeats" text="Seats left" prefWidth="100"/>
+                        <TableColumn fx:id="colPricePerSeat" text="Price/seat" prefWidth="120"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                        <TableColumn fx:id="colActions" text="Actions" prefWidth="140"/>
+                    </columns>
+
+                    <placeholder>
+                        <Label text="No scheduled rides found."
+                               styleClass="empty-placeholder"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </children>
+</AnchorPane>

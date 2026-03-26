@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.passenger.PassengerFindRideController">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Find a Scheduled Ride" styleClass="page-title"/>
+
+            <HBox spacing="10">
+                <TextField fx:id="txtFromFilter" promptText="From"/>
+                <TextField fx:id="txtToFilter" promptText="To (destination)"/>
+                <DatePicker fx:id="dpFilterDate" promptText="Date (optional)"/>
+                <Button text="Search" onAction="#handleSearch"/>
+            </HBox>
+
+            <TableView fx:id="tblRides" prefHeight="380">
+                <columns>
+                    <TableColumn fx:id="colDriver"   prefWidth="120" text="Driver"/>
+                    <TableColumn fx:id="colFrom"     prefWidth="150" text="From"/>
+                    <TableColumn fx:id="colTo"       prefWidth="150" text="To"/>
+                    <TableColumn fx:id="colTime"     prefWidth="140" text="Departure"/>
+                    <TableColumn fx:id="colPrice"    prefWidth="100" text="Fare"/>
+                    <TableColumn fx:id="colSeats"    prefWidth="100" text="Seats Left"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="10">
+                <Button fx:id="btnJoin"
+                        text="Request Seat on Selected Ride"
+                        onAction="#handleJoinRide"/>
+            </HBox>
+
+            <Label fx:id="lblInfo" style="-fx-text-fill: #555555;"/>
+
+        </VBox>
+    </children>
+</AnchorPane>

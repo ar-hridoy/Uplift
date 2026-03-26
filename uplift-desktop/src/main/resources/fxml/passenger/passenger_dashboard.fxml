@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="700"
+            prefWidth="1200"
+            stylesheets="@/css/theme.css"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.passenger.PassengerDashboardController">
+
+    <!-- ============== SIDEBAR ============== -->
+    <left>
+        <VBox fx:id="sidebar" prefWidth="260" styleClass="sidebar">
+
+            <!-- Header card -->
+            <VBox styleClass="sidebar-header-card">
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <StackPane styleClass="sidebar-logo-circle">
+                        <ImageView fitHeight="30" fitWidth="30" preserveRatio="true">
+                            <image>
+                                <Image url="@/img/uplift_logo_c.png" />
+                            </image>
+                        </ImageView>
+                    </StackPane>
+
+                    <VBox spacing="4">
+                        <Label styleClass="sidebar-title" text="UpLift">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                        <Label styleClass="sidebar-subtitle" text="Passenger Panel" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <Separator />
+
+            <!-- "Menu" label -->
+            <Label styleClass="sidebar-menu-title" text="Menu" />
+
+            <!-- Menu buttons -->
+            <VBox spacing="4" styleClass="sidebar-menu">
+
+                <!-- 1. Dashboard Overview -->
+                <ToggleButton fx:id="btnMenuDashboard"
+                              onAction="#showDashboard"
+                              styleClass="sidebar-button">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/img/home.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <text>Dashboard Overview</text>
+                </ToggleButton>
+
+                <!-- 2. Request a Ride -->
+                <ToggleButton fx:id="btnMenuRequestRide"
+                              onAction="#showRequestRide"
+                              styleClass="sidebar-button">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@/img/cycle.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <text>Request a Ride</text>
+                </ToggleButton>
+
+                <!-- 3. Find a Ride -->
+                <ToggleButton fx:id="btnMenuFindRide"
+                              onAction="#showFindRide"
+                              styleClass="sidebar-button">
+                    <graphic>
+                        <ImageView fitHeight="22" fitWidth="22" preserveRatio="true">
+                            <image>
+                                <Image url="@/img/findaride.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <text>Find a Ride</text>
+                </ToggleButton>
+
+                <!-- 4. Payments -->
+                <ToggleButton fx:id="btnMenuPayments"
+                              onAction="#showPayments"
+                              styleClass="sidebar-button">
+                    <graphic>
+                        <ImageView fitHeight="22" fitWidth="22" preserveRatio="true">
+                            <image>
+                                <Image url="@/img/paycheck.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <text>Payments</text>
+                </ToggleButton>
+
+                <!-- 5. Complaints -->
+                <ToggleButton fx:id="btnMenuComplaints"
+                              onAction="#showComplaints"
+                              styleClass="sidebar-button"
+                              text="Complaints" />
+            </VBox>
+
+            <!-- Filler -->
+            <Pane VBox.vgrow="ALWAYS" />
+
+            <!-- Logout at bottom -->
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="btnLogout"
+                        text="LOG OUT"
+                        onAction="#handleLogout"
+                        styleClass="logout-pill-small"/>
+            </HBox>
+
+
+            <Label alignment="CENTER"
+                   maxWidth="Infinity"
+                   styleClass="sidebar-footer"
+                   text="UpLift • Save on every ride"
+                   wrapText="true" />
+        </VBox>
+    </left>
+
+    <!-- ============== TOP BAR ============== -->
+    <top>
+        <HBox spacing="20" styleClass="topbar">
+
+            <!-- LEFT: Welcome text -->
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label fx:id="lblPassengerName"
+                           styleClass="topbar-username"
+                           text="Welcome, Demo Passenger" />
+                    <Label fx:id="lblPassengerEmail"
+                           styleClass="topbar-role"
+                           text="passenger@uplift.com" />
+                </VBox>
+            </HBox>
+
+            <!-- CENTER: Clock card -->
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER" spacing="10" styleClass="topbar-clock">
+                    <Label styleClass="topbar-clock-icon" text="🕒" />
+                    <VBox spacing="2">
+                        <Label fx:id="lblCurrentDateTime"
+                               styleClass="topbar-clock-main"
+                               text="2025-08-19 10:49:23 PM" />
+                        <Label fx:id="lblCurrentDateDetail"
+                               styleClass="topbar-clock-sub"
+                               text="Tuesday, August 19, 2025" />
+                    </VBox>
+                </HBox>
+            </HBox>
+
+            <!-- RIGHT: Profile button -->
+            <Button onAction="#openProfile"
+                    prefWidth="130"
+                    styleClass="topbar-profile-btn">
+                <graphic>
+                    <HBox alignment="CENTER" spacing="8">
+                        <ImageView fitHeight="18" fitWidth="18" preserveRatio="true">
+                            <image>
+                                <Image url="@/img/profile.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="Profile">
+                            <font>
+                                <Font name="System Bold" size="16" />
+                            </font>
+                        </Label>
+                    </HBox>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <!-- ============== CENTER CONTENT ============== -->
+    <center>
+        <StackPane fx:id="contentRoot" styleClass="content-root">
+
+            <!-- Default dashboard view -->
+            <AnchorPane fx:id="dashboardContainer">
+                <children>
+                    <VBox spacing="16">
+                        <padding>
+                            <Insets bottom="20" left="20" right="20" top="20" />
+                        </padding>
+
+                        <Label styleClass="page-title"
+                               text="Dashboard Overview" />
+
+                        <!-- Summary cards -->
+                        <HBox spacing="16">
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Today's Rides" />
+                                <Label fx:id="lblTodayRides" styleClass="card-value" text="0" />
+                            </VBox>
+
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Total Spent Today" />
+                                <Label fx:id="lblTodaySpending" styleClass="card-value" text="/$0.00" />
+                            </VBox>
+
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Pending Requests" />
+                                <Label fx:id="lblPendingRequests" styleClass="card-value" text="0" />
+                            </VBox>
+
+                            <VBox styleClass="card">
+                                <Label styleClass="card-title" text="Upcoming Rides" />
+                                <Label fx:id="lblUpcomingRides" styleClass="card-value" text="0" />
+                            </VBox>
+                        </HBox>
+
+                        <!-- Recent rides table -->
+                        <VBox spacing="10">
+                            <Label styleClass="section-title" text="Recent Rides" />
+                            <TableView fx:id="tblRecentRides" styleClass="table-default">
+                                <columns>
+                                    <TableColumn fx:id="colId"     prefWidth="80"  text="ID" />
+                                    <TableColumn fx:id="colType"   prefWidth="100" text="Type" />
+                                    <TableColumn fx:id="colFrom"   prefWidth="200" text="From" />
+                                    <TableColumn fx:id="colTo"     prefWidth="200" text="To" />
+                                    <TableColumn fx:id="colFare"   prefWidth="120" text="Fare" />
+                                    <TableColumn fx:id="colStatus" prefWidth="120" text="Status" />
+                                    <TableColumn fx:id="colDate"   prefWidth="180" text="Date" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </VBox>
+                </children>
+            </AnchorPane>
+        </StackPane>
+    </center>
+
+</BorderPane>

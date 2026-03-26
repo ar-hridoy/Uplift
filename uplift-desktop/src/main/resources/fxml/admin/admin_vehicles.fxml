@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uplift.desktop.controller.admin.AdminVehiclesController">
+
+    <children>
+        <VBox spacing="16" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Vehicle Management" styleClass="page-title"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Refresh" onAction="#handleRefresh"/>
+            </HBox>
+
+            <!-- Filters -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearch" promptText="Search by plate / rider / vehicle id" prefWidth="340"/>
+                <ComboBox fx:id="cmbStatus" promptText="Status" prefWidth="170"/>
+                <Button text="Search" onAction="#handleSearch"/>
+                <Button text="Reset" onAction="#handleReset"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblStatus" text="" style="-fx-text-fill:#666;"/>
+            </HBox>
+
+            <TabPane VBox.vgrow="ALWAYS">
+                <tabs>
+
+                    <!-- Pending Approvals -->
+                    <Tab text="Pending Approvals" closable="false">
+                        <content>
+                            <VBox spacing="12" style="-fx-padding: 10;">
+                                <TableView fx:id="tblPending" VBox.vgrow="ALWAYS" styleClass="table-default">
+                                    <columns>
+                                        <TableColumn fx:id="colPId" text="Vehicle ID" prefWidth="110"/>
+                                        <TableColumn fx:id="colPRider" text="Rider" prefWidth="220"/>
+                                        <TableColumn fx:id="colPType" text="Type" prefWidth="130"/>
+                                        <TableColumn fx:id="colPPlate" text="Plate" prefWidth="130"/>
+                                        <TableColumn fx:id="colPModel" text="Model" prefWidth="170"/>
+                                        <TableColumn fx:id="colPSubmitted" text="Submitted" prefWidth="180"/>
+                                        <TableColumn fx:id="colPStatus" text="Status" prefWidth="130"/>
+                                    </columns>
+                                </TableView>
+
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <Button text="View Docs" onAction="#viewPendingDocs"/>
+                                    <Button text="Approve" onAction="#approvePending" style="-fx-background-color:#2E7D32; -fx-text-fill:white;"/>
+                                    <Button text="Reject" onAction="#rejectPending" style="-fx-background-color:#E53935; -fx-text-fill:white;"/>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </Tab>
+
+                    <!-- All Vehicles -->
+                    <Tab text="All Vehicles" closable="false">
+                        <content>
+                            <VBox spacing="12" style="-fx-padding: 10;">
+                                <TableView fx:id="tblAll" VBox.vgrow="ALWAYS" styleClass="table-default">
+                                    <columns>
+                                        <TableColumn fx:id="colAId" text="Vehicle ID" prefWidth="110"/>
+                                        <TableColumn fx:id="colARider" text="Rider" prefWidth="220"/>
+                                        <TableColumn fx:id="colAType" text="Type" prefWidth="130"/>
+                                        <TableColumn fx:id="colAPlate" text="Plate" prefWidth="130"/>
+                                        <TableColumn fx:id="colAModel" text="Model" prefWidth="170"/>
+                                        <TableColumn fx:id="colAActive" text="Active" prefWidth="90"/>
+                                        <TableColumn fx:id="colAStatus" text="Verification" prefWidth="140"/>
+                                        <TableColumn fx:id="colAUpdated" text="Last Updated" prefWidth="180"/>
+                                    </columns>
+                                </TableView>
+
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <Button text="View Docs" onAction="#viewAllDocs"/>
+                                    <Button text="Edit/Update" onAction="#editVehicle"/>
+                                    <Button text="Activate/Deactivate" onAction="#toggleActive"/>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </Tab>
+
+                </tabs>
+            </TabPane>
+
+        </VBox>
+    </children>
+</AnchorPane>
